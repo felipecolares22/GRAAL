@@ -66,8 +66,9 @@ int main(){
 	}
 	std::cout<<"]\n" << "Result: " << *aux << std::endl<<std::endl;
 
-/*	//6 
-	result = graal::find(test.begin(), test.begin()+5, sizeof(int), 78, graal::eq);
+	//6 
+	int z = -17;
+	result = graal::find(test.begin(), test.begin()+5, sizeof(int), &z, graal::eq);
 	aux = (int *)result;
 
 	std::cout<<">>>TEST 6: find:\n" << "Array used in test 6: [ ";
@@ -75,7 +76,7 @@ int main(){
 		std::cout<<test[i]<<" ";
 	}
 	std::cout<<"]\n" << "Result: " << *aux << std::endl<<std::endl;
-*/
+
 	//7
 	std::cout<<">>>TEST 7: all_of | any_of | none_of:\n" << "Array used in test 7: [ ";
 	for(int i=0; i<8; i++){

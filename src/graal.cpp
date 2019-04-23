@@ -208,7 +208,7 @@ namespace graal{
 /*
 	//9
 	void * unique(void * first, void * last, size_t size, Equal eq){
-	
+			
 	}
 	
 	//10
