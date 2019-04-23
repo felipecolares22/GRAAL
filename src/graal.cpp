@@ -57,12 +57,27 @@ namespace graal{
 			plast -=size;
 		}
 	}
-/*
+
 	//3
 	void * copy(const void * first, const void * last, const void * d_first, size_t size){
-	
+		
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+		byte *pd_first = (byte *)d_first;
+
+		void *result;
+
+		while(pfirst <= plast){
+			std::memcpy(pd_first, pfirst, size);
+			pfirst += size;
+			pd_first += size;
+		}
+
+		result = (void *)pd_first;
+		return result;
 	}
-	
+		
+/*	
 	//4
 	void * clone(const void * first, const void * last, size_t size){
 	
