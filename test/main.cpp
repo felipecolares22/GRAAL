@@ -54,7 +54,7 @@ int main(){
 		std::cout<<*aux<<" ";
 		aux++;
 	}
-	std::cout<<"]"<<std::endl;
+	std::cout<<"]"<<std::endl<<std::endl;
 	
 	//5
 	result = graal::find_if(test.begin(), test.end(), sizeof(int), graal::p);
@@ -66,6 +66,32 @@ int main(){
 	}
 	std::cout<<"]\n" << "Result: " << *aux << std::endl<<std::endl;
 
-	
+/*	//6 
+	result = graal::find(test.begin(), test.begin()+5, sizeof(int), 78, graal::eq);
+	aux = (int *)result;
+
+	std::cout<<">>>TEST 6: find:\n" << "Array used in test 6: [ ";
+	for(int i=0; i<8; i++){
+		std::cout<<test[i]<<" ";
+	}
+	std::cout<<"]\n" << "Result: " << *aux << std::endl<<std::endl;
+*/
+	//7
+	std::cout<<">>>TEST 7: all_of | any_of | none_of:\n" << "Array used in test 7: [ ";
+	for(int i=0; i<8; i++){
+		std::cout<<test[i]<<" ";
+	}
+	std::cout<<"]\n" << "Result: " << "all_of: " << graal::all_of(test.begin(), test.end(), sizeof(int), graal::p) << std::endl
+					 <<	"Result: " << "any_of: " << graal::any_of(test.begin(), test.end(), sizeof(int), graal::p) << std::endl
+					 <<	"Result: " << "none_of: " << graal::none_of(test.begin(), test.end(), sizeof(int), graal::p) << std::endl << std::endl;
+
+	//8
+	std::cout<<">>>TEST 8: equal:\n" << "Array used in test 8: [ ";
+	for(int i=0; i<8; i++){
+		std::cout<<test[i]<<" ";
+	}
+	std::cout<<"]\n" << "Result: " << "equal (f1,l1,f2): " << graal::equal(test.begin(), test.begin()+3, test.begin()+4, sizeof(int)) << std::endl
+					 << "Result: " << "equal (f1,l1,f2,l2): " << graal::equal(test.begin(), test.begin()+4, test.begin()+5, test.end(), sizeof(int)) << std::endl;
+
 	return 0;
 }

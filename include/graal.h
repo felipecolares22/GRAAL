@@ -40,8 +40,8 @@ namespace graal{
 	bool none_of(const void * first, const void * last, size_t size, Predicate p);
 	
 	//8
-	bool equal(const void * first1, const void * last1, const void * first2);
-	bool equal(const void * first1, const void * last1, const void * first2, const void * last2);
+	bool equal(const void * first1, const void * last1, const void * first2, size_t size);
+	bool equal(const void * first1, const void * last1, const void * first2, const void * last2, size_t size);
 
 	//9
 	void * unique(void * first, void * last, size_t size, Equal eq);

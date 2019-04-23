@@ -6,6 +6,8 @@
 using byte = unsigned char;
 using Compare = bool (*)(const void*, const void *);
 using Predicate = bool (*)(const void*);
+using Equal = bool (*)(const void*, const void*);
+
 
 namespace graal{
 
@@ -111,38 +113,99 @@ namespace graal{
 		return pfirst;
 	}
 
-/*	
+
 	//6
-	bool eq(const void*, const void *){
-	
+	bool eq(const void* var1, const void * var2){
+		int* pvar1 = (int*)var1;
+		int* pvar2 = (int*)var2;
+
+		return *pvar1==*pvar2;
 	}
 	
 	const void * find(const void * first, const void * last, size_t size, const void * value, Equal eq){
-	
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+
+		while(pfirst < plast){
+			if(eq(pfirst, value)){
+				return pfirst;
+			}
+			pfirst +=size;
+		}
+		return plast;
 	}
-	
+
+
 	//7
 	bool all_of(const void * first, const void * last, size_t size, Predicate p){
-	
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+
+		while(pfirst < plast){
+			if(p(pfirst) == false) return false;
+			pfirst += size;
+		}
+		return true;
 	}
 	
 	bool any_of(const void * first, const void * last, size_t size, Predicate p){
-	
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+
+		while(pfirst < plast){
+			if(p(pfirst)) return true;
+			pfirst += size;
+		}
+		return false;
 	}
 	
 	bool none_of(const void * first, const void * last, size_t size, Predicate p){
-	
-	}
-	
-	//8
-	bool equal(const void * first1, const void * last1, const void * first2){
-	
-	}
-	
-	bool equal(const void * first1, const void * last1, const void * first2, const void * last2){
-	
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+
+		while(pfirst < plast){
+			if(p(pfirst)) return false;
+			pfirst += size;
+		}
+		return true;
 	}
 
+
+	//8
+	bool equal(const void * first1, const void * last1, const void * first2, size_t size){
+		byte *pfirst = (byte *)first1;
+		byte *plast = (byte *)last1;
+		byte *pfirst2 = (byte *)first2;
+		int aux = plast-pfirst;
+
+		for(int i=0; i<aux; i+=size){
+			if(pfirst != pfirst2) return false;
+			else{
+				pfirst += size;
+				pfirst2 += size;
+			}
+		}
+		return true;
+	}
+	
+	bool equal(const void * first1, const void * last1, const void * first2, const void * last2, size_t size){
+		byte *pfirst = (byte *)first1;
+		byte *plast = (byte *)last1;
+		byte *pfirst2 = (byte *)first2;
+		byte *plast2 = (byte *)last2;
+
+		while(pfirst < plast and pfirst2 < plast2){
+			if(pfirst != pfirst2) return false;
+			if(pfirst == plast-size and pfirst2 == plast2-size){
+				return true;
+			}
+			pfirst += size;
+			pfirst2 += size;
+		}
+		return false;
+	}
+
+/*
 	//9
 	void * unique(void * first, void * last, size_t size, Equal eq){
 	
