@@ -5,7 +5,7 @@
 
 using byte = unsigned char;
 using Compare = bool (*)(const void*, const void *);
-
+using Predicate = bool (*)(const void*);
 
 namespace graal{
 
@@ -18,27 +18,23 @@ namespace graal{
 	}
 
 	const void * min (const void *first, const void *last, std::size_t size, Compare cmp){
-	
+		
+
 		byte * pfirst = (byte*) first;
 		byte * plast = (byte*) last;
 		byte smallest[size];
 		byte aux_arr[size];
-
 		void * result = pfirst;
 	
 		std::memcpy(smallest, pfirst, size);
-	
 		while(pfirst < plast){
 			std::memcpy(aux_arr, pfirst, size);
-	
 			if( cmp(aux_arr, smallest ) ){
 				std::memcpy(smallest, pfirst, size);
 				result = pfirst;
 			}
-	
 			pfirst += size;
 		}
-	
 		return result;
 	}
 
@@ -76,22 +72,46 @@ namespace graal{
 		result = (void *)pd_first;
 		return result;
 	}
-		
-/*	
+			
 	//4
 	void * clone(const void * first, const void * last, size_t size){
-	
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+		int aux_arr_size = (plast-pfirst);
+		byte *aux_arr = new byte[aux_arr_size];
+
+		void *result = &aux_arr[0];
+
+		while(pfirst < plast){
+			std::memcpy(aux_arr, pfirst, size);
+			pfirst += size;
+			aux_arr += size;
+		}
+		return result;
 	}
 
+
 	//5
-	bool p(const void *){
-	
+	bool p(const void * pnum){
+		int* aux = (int *) pnum;
+		return *aux > 1; 	
 	}
 	
 	const void * find_if(const void * first, const void * last, size_t size, Predicate p){
-	
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+
+		while(pfirst < plast){
+			if(p(pfirst)){
+				return pfirst;
+			}
+			pfirst += size;
+		}
+		pfirst -=size;
+		return pfirst;
 	}
-	
+
+/*	
 	//6
 	bool eq(const void*, const void *){
 	
