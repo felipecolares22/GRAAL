@@ -1,6 +1,6 @@
 # GRAAL
 
-	GRAAL stands for "GeneRic Array Algorithms Library", it is a c++ library of generic pointer functions, devolved for the Basic Data Structures I class.
+	GRAAL stands for "GeneRic Array Algorithms Library", it is a c++ library of generic-pointer functions, developed for the Basic Data Structures I class.
 		In this actual state, both 'unique' and 'sort' functions are still a work in progress, so they were left as comments.
 
 ### Student:
