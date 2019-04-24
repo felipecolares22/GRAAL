@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/include/graal.h
+iostream
+-
+cstring
+-
+
+/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/test/main.cpp
+iterator
+-
+functional
+-
+algorithm
+-
+gtest/gtest.h
+/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/test/gtest/gtest.h
+../include/graal.h
+/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/include/graal.h
+

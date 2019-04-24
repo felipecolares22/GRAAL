@@ -15,40 +15,39 @@ namespace graal{
 	
 	//1
 	const void * min(const void * first, const void * last, std::size_t size, Compare cmp);
-	bool cmp(const void* var1, const void * var2);
 	
 	//2
-	void reverse(void * first, void * last, size_t size);
+	void reverse(void * first, void * last, std::size_t size);
 
 	//3
-	void * copy(const void * first, const void * last, const void * d_first, size_t size);
+	void * copy(const void * first, const void * last, const void * d_first, std::size_t size);
 	
 	//4
-	void * clone(const void * first, const void * last, size_t size);
+	void * clone(const void * first, const void * last, std::size_t size);
 
 	//5
-	const void * find_if(const void * first, const void * last, size_t size, Predicate p);
-	bool p(const void *);
+	const void * find_if(const void * first, const void * last, std::size_t size, Predicate p);
 	
 	//6
-	const void * find(const void * first, const void * last, size_t size, const void * value, Equal eq);
-	bool eq(const void*, const void *);
+	const void * find(const void * first, const void * last, std::size_t size, const void * value, Equal eq);
 	
 	//7
-	bool all_of(const void * first, const void * last, size_t size, Predicate p);
-	bool any_of(const void * first, const void * last, size_t size, Predicate p);
-	bool none_of(const void * first, const void * last, size_t size, Predicate p);
+	bool all_of(const void * first, const void * last, std::size_t size, Predicate p);
+	bool any_of(const void * first, const void * last, std::size_t size, Predicate p);
+	bool none_of(const void * first, const void * last, std::size_t size, Predicate p);
 	
 	//8
-	bool equal(const void * first1, const void * last1, const void * first2, size_t size);
-	bool equal(const void * first1, const void * last1, const void * first2, const void * last2, size_t size);
+	bool equal(const void * first1, const void * last1, const void * first2, std::size_t size, Equal eq);
+	bool equal(const void * first1, const void * last1, const void * first2, const void * last2, std::size_t size, Equal eq);
 
 	//9
-	void * unique(void * first, void * last, size_t size, Equal eq);
+	void * unique(void * first, void * last, std::size_t size, Equal eq);
 	
 	//10
-	void * partition(void * first, void * last, size_t size, Predicate p);
+	void * partition(void * first, void * last, std::size_t size, Predicate p);
 	
+	//11
+	void sort(void * first, std::size_t count, std::size_t size, Compare cmp);
 }	
 	
 #endif

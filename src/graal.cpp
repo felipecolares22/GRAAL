@@ -12,13 +12,6 @@ using Equal = bool (*)(const void*, const void*);
 namespace graal{
 
 	//1
-	bool cmp(const void* var1, const void* var2){
-		const int * pvar1 = static_cast<const int*>(var1);
-		const int * pvar2 = static_cast<const int*>(var2);
-		
-		return (*pvar1<*pvar2);
-	}
-
 	const void * min (const void *first, const void *last, std::size_t size, Compare cmp){
 		
 
@@ -41,13 +34,13 @@ namespace graal{
 	}
 
 	//2
-	void reverse(void * first, void * last, size_t size){
+	void reverse(void * first, void * last, std::size_t size){
 	
 		byte *pfirst = (byte *) first;
 		byte *plast = (byte *) last;
 		byte aux[size];
 		
-		while(pfirst != plast){
+		while(pfirst < plast){
 			std::memcpy(aux, plast-size, size);
 			std::memcpy(plast-size, pfirst, size);
 			std::memcpy(pfirst, aux, size);
@@ -57,7 +50,7 @@ namespace graal{
 	}
 
 	//3
-	void * copy(const void * first, const void * last, const void * d_first, size_t size){
+	void * copy(const void * first, const void * last, const void * d_first, std::size_t size){
 		
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
@@ -65,7 +58,7 @@ namespace graal{
 
 		void *result;
 
-		while(pfirst <= plast){
+		while(pfirst < plast){
 			std::memcpy(pd_first, pfirst, size);
 			pfirst += size;
 			pd_first += size;
@@ -76,7 +69,7 @@ namespace graal{
 	}
 			
 	//4
-	void * clone(const void * first, const void * last, size_t size){
+	void * clone(const void * first, const void * last, std::size_t size){
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
 		int aux_arr_size = (plast-pfirst);
@@ -94,12 +87,7 @@ namespace graal{
 
 
 	//5
-	bool p(const void * pnum){
-		int* aux = (int *) pnum;
-		return *aux > 1; 	
-	}
-	
-	const void * find_if(const void * first, const void * last, size_t size, Predicate p){
+	const void * find_if(const void * first, const void * last, std::size_t size, Predicate p){
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
 
@@ -109,20 +97,12 @@ namespace graal{
 			}
 			pfirst += size;
 		}
-		pfirst -=size;
-		return pfirst;
+		return plast;
 	}
 
 
 	//6
-	bool eq(const void* var1, const void * var2){
-		int* pvar1 = (int*)var1;
-		int* pvar2 = (int*)var2;
-
-		return *pvar1==*pvar2;
-	}
-	
-	const void * find(const void * first, const void * last, size_t size, const void * value, Equal eq){
+	const void * find(const void * first, const void * last, std::size_t size, const void * value, Equal eq){
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
 
@@ -137,7 +117,7 @@ namespace graal{
 
 
 	//7
-	bool all_of(const void * first, const void * last, size_t size, Predicate p){
+	bool all_of(const void * first, const void * last, std::size_t size, Predicate p){
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
 
@@ -148,7 +128,7 @@ namespace graal{
 		return true;
 	}
 	
-	bool any_of(const void * first, const void * last, size_t size, Predicate p){
+	bool any_of(const void * first, const void * last, std::size_t size, Predicate p){
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
 
@@ -159,7 +139,7 @@ namespace graal{
 		return false;
 	}
 	
-	bool none_of(const void * first, const void * last, size_t size, Predicate p){
+	bool none_of(const void * first, const void * last, std::size_t size, Predicate p){
 		byte *pfirst = (byte *)first;
 		byte *plast = (byte *)last;
 
@@ -172,14 +152,14 @@ namespace graal{
 
 
 	//8
-	bool equal(const void * first1, const void * last1, const void * first2, size_t size){
+	bool equal(const void * first1, const void * last1, const void * first2, std::size_t size, Equal eq){
 		byte *pfirst = (byte *)first1;
 		byte *plast = (byte *)last1;
 		byte *pfirst2 = (byte *)first2;
 		int aux = plast-pfirst;
 
 		for(int i=0; i<aux; i+=size){
-			if(pfirst != pfirst2) return false;
+			if(eq(pfirst,pfirst2) == false) return false;
 			else{
 				pfirst += size;
 				pfirst2 += size;
@@ -188,15 +168,15 @@ namespace graal{
 		return true;
 	}
 	
-	bool equal(const void * first1, const void * last1, const void * first2, const void * last2, size_t size){
+	bool equal(const void * first1, const void * last1, const void * first2, const void * last2, std::size_t size, Equal eq){
 		byte *pfirst = (byte *)first1;
 		byte *plast = (byte *)last1;
 		byte *pfirst2 = (byte *)first2;
 		byte *plast2 = (byte *)last2;
 
 		while(pfirst < plast and pfirst2 < plast2){
-			if(pfirst != pfirst2) return false;
-			if(pfirst == plast-size and pfirst2 == plast2-size){
+			if(eq(pfirst,pfirst2) == false) return false;
+			if(eq(pfirst,plast-size) and eq(pfirst2,plast2-size)){
 				return true;
 			}
 			pfirst += size;
@@ -207,15 +187,54 @@ namespace graal{
 
 /*
 	//9
-	void * unique(void * first, void * last, size_t size, Equal eq){
+	void * unique(void * first, void * last, std::size_t size, Equal eq){
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+		byte *aux = pfirst+size;
+
+		while(pfirst < plast){
 			
+		
+		}
+		
 	}
-	
+*/
+
 	//10
-	void * partition(void * first, void * last, size_t size, Predicate p){
+	void * partition(void * first, void * last, std::size_t size, Predicate p){
+		byte *pfirst = (byte *)first;
+		byte *plast = (byte *)last;
+		byte *fast = pfirst + size;
+		byte aux[size];
+
+		while(pfirst < plast){
+			if(p(pfirst) == false){
+				while(true){
+					if(fast >= plast) return pfirst;
+					if(p(fast) == true){
+						std::memcpy( aux, fast, size );
+             	  		std::memcpy( fast, pfirst, size );
+               			std::memcpy( pfirst, aux, size );
+               			
+						break;
+					}
+					fast += size;
+				}
+			}
+			pfirst += size;
+		}
+	}
+	
+/*
+	//11
+	void sort(void * first, std::size_t count, std::size_t size, Compare cmp){
+		byte *pfirst = (byte *)first;
+		byte * 
+		byte aux[size];
 	
 	}
-*/	
-	
+*/
+
 }
+
 
