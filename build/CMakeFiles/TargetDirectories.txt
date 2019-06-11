@@ -1,8 +1,0 @@
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/install/strip.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/install/local.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/run_tests.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/edit_cache.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/rebuild_cache.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/list_install_components.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/graal.dir
-/home/felipecolares/Documents/UFRN/2019.1/LP1/GRAAL/build/CMakeFiles/install.dir

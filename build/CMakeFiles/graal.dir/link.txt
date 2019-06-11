@@ -1,2 +1,0 @@
-/usr/bin/ar qc libgraal.a  CMakeFiles/graal.dir/src/graal.cpp.o
-/usr/bin/ranlib libgraal.a
